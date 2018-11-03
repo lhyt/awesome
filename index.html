@@ -38,7 +38,7 @@
 </body>
 <script>
 let _fucker_ = false;
-let timer = requestAnimationFrame(() => {
+let timer = setInterval(() => {
     document
     .querySelector('.loading-paint')
     .style
@@ -46,6 +46,6 @@ let timer = requestAnimationFrame(() => {
         _fucker_ ? 50 : 50.0000001
     );
     _fucker_ = !_fucker_;
-})
+}, 200)
 </script>
 </html>
