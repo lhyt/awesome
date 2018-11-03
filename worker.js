@@ -18,7 +18,11 @@ class RandomColorPainter {
         
         for (let x = 0; x < PaintSize.width / w; x++) {
             for (let y = 0; y < PaintSize.height / h; y++) {
-                ctx.fillStyle = `#${Math.random().toString(16).slice(2, 8)}`
+                let rgb = Math.random().toString(16).slice(2, 8)
+                if (parseInt(rgb, 36) < 373162686) {
+                    rgb = '000000';
+                }
+                ctx.fillStyle = `#${rgb}`
                 ctx.beginPath();
                 ctx.rect(x * (w + spacing), y * (h + spacing), w, h);
                 ctx.fill();
