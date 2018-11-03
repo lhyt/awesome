@@ -25,18 +25,23 @@
             --w: 50;
             --h: 50;
             --spacing: 10;
-            word-break: break-all;
-            line-height: 100vh;
             text-align: center;
             font-size: 25px;
             --m: var(--mid);
         }
+        .loading-paint::after {
+            content: ' 主人说，绝对不用任何框架做页面，直接用浏览器原生的技术';
+            display: block;
+            word-break: break-all;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
     </style>
 </head>
 <body>
-    <div class="loading-paint">
-        主人说，绝对不用任何框架做页面，直接用浏览器原生的技术
-    </div>
+    <div class="loading-paint"></div>
 </body>
 <script>
 let _fucker_ = false;
