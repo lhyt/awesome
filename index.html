@@ -38,7 +38,12 @@
 </body>
 <script>
 let timer = setInterval(() => {
-    document.querySelector('.loading-paint').style.setProperty('--w', 50)
+    document
+    .querySelector('.loading-paint')
+    .style
+    .setProperty('--w',
+        Math.random() < 0.5 ? 50 : 50.0000001
+    )
 }, 300)
 </script>
 </html>
