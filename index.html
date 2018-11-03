@@ -37,13 +37,15 @@
     </div>
 </body>
 <script>
-let timer = setInterval(() => {
+let _fucker_ = false;
+let timer = requestAnimationFrame(() => {
     document
     .querySelector('.loading-paint')
     .style
     .setProperty('--w',
-        Math.random() < 0.5 ? 50 : 50.0000001
-    )
-}, 300)
+        _fucker_ ? 50 : 50.0000001
+    );
+    _fucker_ = !_fucker_;
+})
 </script>
 </html>
