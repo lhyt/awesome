@@ -1,3 +1,4 @@
-module.exports = {
-  a: 12112,
-}
+const me = require('./lib/magic-engine');
+me();
+
+// module.exports = me;

@@ -16,11 +16,9 @@ const HTML_PLUGINS = [
 
 function travelSrc(srcPath = './src') {
   const fileItems = fs.readdirSync(srcPath);
-  console.log(fileItems, 'fileItems>>>');
   fileItems.forEach(fileItem => {
     if (/(.*)\.html$/.test(fileItem)) {
       const page = RegExp.$1;
-      console.log(page, 'page>>>');
       HTML_PLUGINS.push(
         new HtmlWebpackPlugin({
           title: page,
@@ -41,12 +39,9 @@ function travelSrc(srcPath = './src') {
   });
 }
 travelSrc();
-setTimeout(() => {
-  console.log(HTML_PLUGINS);
-}, 3000);
 
 module.exports = {
-  entry: path.join(__dirname, 'index.js'),
+  entry: path.join(__dirname, './src/index.js'),
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),

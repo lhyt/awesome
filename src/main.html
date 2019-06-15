@@ -7,19 +7,20 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="keywords" content="前端|JavaScript|lhyt">
 	<meta name="description" content="希望成为技术栈非常花哨且具有学习意义的项目">
-	<link rel="import" href="/src/components/header.html">
+	<link data-import="header" rel="import" href="/src/components/header.html">
 	<title>im lhyt</title>
 </head>
 
 <body>
-	<main>
-		<header>666</header>
+	<main class="lhyt-main-container">
+		$$header$$
+		<header class="lhyt-main-container-header"></header>
 	</main>
 </body>
-<script src=""></script>
+
 <script>
-	const content = document.querySelector('link[rel="import"]').import;
-	console.log(content, 12);
+	const content = document.querySelector('link[data-import="header"]').import;
+	document.querySelector('.lhyt-main-container-header').appendChild(content.body);
 </script>
 
 </html>
