@@ -8,7 +8,7 @@
     "watch": "webpack --mode development --watch --progress --config webpack.dev.config.js",
     "dev": "webpack-dev-server --colors --progress --open --config webpack.dev.config.js",
     "dist": "webpack --config webpack.prod.config.js",
-    "sync-dist": "git add . && git commit -m \"feat: 🍰 sync-dist\""
+    "sync-dist": "git add ."
   },
   "sideEffects": false,
   "repository": {
