@@ -13,13 +13,14 @@
 
 <body>
 	<main class="lhyt-main-container">
-		<header class="lhyt-main-container-header">666</header>
+		$$header$$
+		<header class="lhyt-main-container-header"></header>
 	</main>
-</body>
-<script src=""></script>
+<script type="text/javascript" src="/bundle.js?05455a78e16e75341d92"></script></body>
+
 <script>
 	const content = document.querySelector('link[data-import="header"]').import;
-	document.querySelector('.lhyt-main-container-header').innerHTML = content;
+	document.querySelector('.lhyt-main-container-header').appendChild(content.body);
 </script>
 
 </html>
