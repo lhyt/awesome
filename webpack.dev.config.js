@@ -26,6 +26,7 @@ function travelSrc(srcPath = './src') {
           chunks: page, // 添加引入的js,也就是entry中的key
           filename: `${srcPath}/${page}.html`,
           hash: true,
+          headerImg: '/src/assets/images/header_1.png',
         }),
       );
       return;
