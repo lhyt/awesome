@@ -24,14 +24,13 @@ function travelBody(body = document.body) {
           temp.unshift(match);
         });
         temp.forEach(m => {
-          const innerDocumentEles = chooseElements(m);
+          const { document: doc, childNodes: children, pathname } = chooseElements(m)
+          const innerDocumentEles = children;
           [...innerDocumentEles].reduceRight((_, ele) => {
             insertEle(ele, childNode);
           });
-        })
-        setTimeout(() => {
-          body.removeChild(childNode);
         });
+        body.removeChild(childNode);
       }
       return;
     }
@@ -42,8 +41,14 @@ function travelBody(body = document.body) {
 }
 
 function chooseElements(name) {
-  const { body } = querySelector(`link[data-import="${name}"]`).import;
-  return body.cloneNode(true).childNodes;
+  // document object in html import
+  const link = querySelector(`link[data-import="${name}"]`);
+  const $document = link.import;
+  return {
+    document: $document,
+    childNodes: $document.body.cloneNode(true).childNodes,
+    pathname: new URL(link.href).pathname,
+  };
 }
 
 function replaceEle(ele, target) {
@@ -64,6 +69,15 @@ function insertEle(ele, target) {
   } else {
     parentNode.insertBefore(ele, target.nextSibling);
   }
+}
+
+/**
+ * index.html pathname => index.js pathname
+ * @param {string} pathname 
+ * @returns {string} requireJs pathname
+ */
+function pathNameToRequire(pathname) {
+  return pathname.replace(/\.html$/, '.js');
 }
 
 module.exports = E;

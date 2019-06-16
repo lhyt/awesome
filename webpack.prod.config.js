@@ -12,7 +12,6 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: '模块热替换',
       template: './src/main.html',
       chunks: 'main', // 添加引入的js,也就是entry中的key
       filename: `index.html`,

@@ -13,7 +13,7 @@
     .lhyt-main-container-header__img {
       width: 100%;
       height: 395px;
-      background: url('../assets/images/header_1.png') no-repeat;
+      background: url('../../assets/images/header_1.png') no-repeat;
       background-size: cover;
     }
     .lhyt-main-container-header__nav {
@@ -44,23 +44,4 @@
     </figure>
   </header>
 </body>
-<script>
-  window.onload = () => {
-    const handleClickNav = [
-      () => {
-        window.location.href = 'https://www.github.com/lhyt';
-      },
-      () => {
-        window.location.href = '/src/houdini/';
-      },
-    ]
-  
-    const navs = document.querySelectorAll('.lhyt-main-container-header__nav div');
-    [...navs].forEach((nav, i) => {
-      nav.addEventListener('click', e => {
-        handleClickNav[i]();
-      })
-    });
-  }
-</script>
 </html>
