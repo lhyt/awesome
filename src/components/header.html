@@ -4,10 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="pre-load" href="">
   <title>header</title>
   <style>
     figure {
-      margin-top: 0;
+      margin: 0;
     }
     .lhyt-main-container-header__img {
       width: 100%;
@@ -15,14 +16,49 @@
       background: url('../assets/images/header_1.png') no-repeat;
       background-size: cover;
     }
+    .lhyt-main-container-header__nav {
+      position: absolute;
+      top: 0;
+      display: flex;
+    }
+    .lhyt-main-container-header__nav div {
+      color: #fff;
+      font-weight: bolder;
+      margin: 12px;
+      font-size: 16px;
+      cursor: pointer;
+      user-select: none;
+    }
   </style>
 </head>
 <body>
   <header class="lhyt-main-container-header">
+    <nav class="lhyt-main-container-header__nav">
+      <div>About Me</div>
+      <div>Houdini Demo</div>
+    </nav>
     <figure>
       <div class="lhyt-main-container-header__img"></div>
-      <figcaption></figcaption>
+      <figcaption>
+      </figcaption>
     </figure>
   </header>
 </body>
+<script>
+  const handleClickNav = [
+    () => {
+      window.location.href = 'https://www.github.com/lhyt';
+    },
+    () => {
+      window.location.href = '/src/houdini/';
+    },
+  ]
+
+  const navs = document.querySelectorAll('.lhyt-main-container-header__nav div');
+  [...navs].forEach((nav, i) => {
+    nav.addEventListener('click', e => {
+      handleClickNav[i]();
+    })
+  });
+</script>
 </html>
