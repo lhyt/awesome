@@ -48,11 +48,17 @@ module.exports = {
     publicPath: '/'
   },
   devServer: {
-    contentBase: '/',
+    contentBase: './',
     compress: true,
     port: 9000,
   },
   devtool: 'inline-source-map',
+  module: {
+    rules: [{
+      test: /\.(png|svg|jpg|gif)$/,
+      loader: 'file-loader',
+    }],
+  },
   plugins: [
     new CleanWebpackPlugin(),
     ...HTML_PLUGINS,

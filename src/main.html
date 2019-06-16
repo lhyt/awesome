@@ -8,19 +8,24 @@
 	<meta name="keywords" content="前端|JavaScript|lhyt">
 	<meta name="description" content="希望成为技术栈非常花哨且具有学习意义的项目">
 	<link data-import="header" rel="import" href="/src/components/header.html">
+	<link data-import="asd" rel="import" href="/src/components/asd.html">
 	<title>im lhyt</title>
+	<style>
+		body {
+			margin: 0;
+		}
+	</style>
 </head>
 
 <body>
 	<main class="lhyt-main-container">
 		$$header$$
-		<header class="lhyt-main-container-header"></header>
 	</main>
 </body>
 
 <script>
-	const content = document.querySelector('link[data-import="header"]').import;
-	document.querySelector('.lhyt-main-container-header').appendChild(content.body);
+	// const content = document.querySelector('link[data-import="header"]').import;
+	// document.querySelector('.lhyt-main-container-header').appendChild(content.body);
 </script>
 
 </html>
