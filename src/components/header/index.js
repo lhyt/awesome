@@ -6,6 +6,9 @@ module.exports = function (doc = document) {
     () => {
       window.location.href = '/src/houdini/';
     },
+    () => {
+      window.location.href = '/articles';
+    },
   ]
   
   const navs = doc.querySelectorAll('.lhyt-main-container-header__nav div');

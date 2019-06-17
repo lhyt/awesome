@@ -40,6 +40,7 @@ function travelSrc(srcPath = './src') {
   });
 }
 travelSrc();
+travelSrc('./articles');
 
 module.exports = {
   entry: path.join(__dirname, './src/index.js'),
