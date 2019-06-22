@@ -8,7 +8,10 @@
     "watch": "webpack --mode development --watch --progress --config webpack.dev.config.js",
     "dev": "webpack-dev-server --colors --progress --open --config webpack.dev.config.js",
     "dist": "webpack --config webpack.prod.config.js",
-    "git": "npm run dist && git add . && git commit -m "
+    "git": "npm run dist && git add . && git commit -m ",
+    "postgit": "git push",
+    "env": "echo $NODE_ENV",
+    "preenv": "echo 1"
   },
   "sideEffects": false,
   "repository": {
