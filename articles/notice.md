@@ -25,9 +25,7 @@
       required: true,
       message: '请输入名称',
     }],
-  })(
-    <WrapInput realval={props.dataSource.name} />,
-  )}
+  })(<Input />)}
   </Item>
   <Item label="描述">
   {getFieldDecorator('desc', {
@@ -35,9 +33,7 @@
       required: true,
       message: '请输入描述',
     }],
-  })(
-    <WrapInput realval={props.dataSource.desc} />,
-  )}
+  })(<Input />)}
   </Item>
   <Item label="类型">
   {getFieldDecorator('type', {
@@ -45,9 +41,7 @@
       required: true,
       message: '请选择类型',
     }],
-  })(
-    <WrapCheckbox realval={props.dataSource.type} />,
-  )}
+  })(<Checkbox />)}
   </Item>
 </Form>
 ```
@@ -63,14 +57,15 @@ const items = [
       message: '请输入名称',
     }],
     },
-    component: <WrapInput realval={props.dataSource.desc} />
+    component: <Input />
   },
   // ...
 ]
 ```
 
-再比如一个很长的if，后台错误码前端处理很常见的一段代码：
+再比如一个很长的if，后台错误码在前端处理，很常见的一段代码：
 ```js
+// before
 if (type === 1) {
   console.log('add')
 } else if (type === 2) {
@@ -80,9 +75,8 @@ if (type === 1) {
 } else {
   console.log('get')
 }
-```
-改进：
-```js
+
+// after
 const MAP = {
   1: 'add',
   2: 'delete',
@@ -328,7 +322,7 @@ reqs.a()
   <section>
   对于依赖注入的概念，举个例子。比如要造一辆汽车，a擅长制造负责车头车尾车轮，b擅长组装负责车身和其他部分连接，模块化分工，没毛病。突然有一天要做个会飞的车，而会飞要先有一个翅膀、或者螺旋桨，而且要装到车身处。此时让负责车身的b来做，无疑是很困难，a才是更适合人选。所以，a就友情帮忙b解决问题。后来，老板说要做一个会说话的车，还要有嘴巴，嘴巴要装到车头一个很合适的位置。此时，a压力又大了，b也友情帮忙设计嘴巴合适的位置。如此重复，随着需求增加，他们两个说好的模块化分工已经乱成一团。
 
-如果一开始他们的定位就换一种，a负责组装，b负责制造。无论a造了个什么<ruby>东西<rp>(</rp><rt>依赖</rt><rp>)</rp></ruby>，随意丢给b（注入到b提供的容器）就好了，让b组装，后来他们就愉快合作，也无惧任何需求了。这就是依赖注入带来的显著效果。我们平时可以在一些地方看见它的影子：amd模块化方案、react用props展示组件、angular1、react hook等
+如果一开始他们的定位就换一种，a负责组装，b负责制造。无论a造了个<ruby>什么东西<rp>(</rp><rt>依赖</rt><rp>)</rp></ruby>，<ruby>随意丢给b<rp>(</rp><rt>注入</rt><rp>)</rp></ruby>就好了，让b组装，后来他们就愉快合作，也无惧任何需求了。这就是依赖注入带来的显著效果。我们平时可以在一些地方看见它的影子：amd模块化方案、react用props展示组件、angular1、react hook等
   </section>
 </details>
 
@@ -362,7 +356,7 @@ class App extends Component {
   </ul>
 </App>
 ```
-当然，事情肯定不会这么简单，现在和你说标题永远不变，转身就变给你看：如果用户没参加过，那就展示另一个灰色提示、如果用户分数很高，给他标题加一个角标、如果充钱，标题换个皮肤
+当然，<ruby>事情肯定不会这么简单<rt>人都是善变的</rt></ruby>，现在和你说标题永远不变，转身就变给你看：如果用户没参加过，那就展示另一个灰色提示、如果用户分数很高，给他标题加一个角标、如果充钱，标题换个皮肤
 
 我们还是保持尽量少改核心逻辑原则，先把header改成大写开头，抽出一个组件：
 ```jsx
@@ -417,6 +411,7 @@ function Header(props) {
 前面的例子，我们都是做很小改动就完成了。当然每一次改个数字改个词，前端就要发布，这也不是优雅的解决方案。所以最终解决方案应该是，把这部分配置抽离出来，做到一个运营配置平台上，前端通过接口读取该平台的配置回来渲染页面。运营需要更改，我们只需要去平台上把配置修改即可。
 
 ```js
+// 让配置写在一个可视化配置平台上
 // const cgiMAp = {
 //   '/a': {
 //     name: 'nickname',
@@ -472,9 +467,11 @@ $ git push
 - 👧：“不说了，我要继续把git hook集成到里面，然后直接远程部署，执行dist命令......做到一个npm run git实现一条龙服务。还有很多事情要做，每天进步一点点，我爱工作。今天又是元气满满的一天哦”
 
 ### 给自己一个舒服的开发环境
+- **vscode插件**  很多人
 
 
 ### 发散思维，举一反三
+
 
 # 想办法搞点事情
 > “天天都搞这个，天天都是同一个姿势，都腻了，能不能换一下？”
