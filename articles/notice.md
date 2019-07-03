@@ -511,18 +511,16 @@ lodash则考虑很周全，所有的原生类都有一套拷贝方法，如果�
 4. 参数默认值
 5. generator函数
 6. 函数名字
-7. iife，不只是(function(){})()呢
+7. iife return的函数，不只是(function(){})()呢
 
-就算是实现了，也做不到完美。所以lodash里面可以看见一段这样的代码：
+就算是实现了，也做不到完美。如果从标准的json来说，只有除了function、symbol、undefined的基本数据类型可以拷贝，对象只有普通对象和数组。但是对于前端，业务中可能会拷贝undefined、一些其他的类。对于function，lodash都不会拷贝的了，所以lodash里面可以看见一段这样的代码：
 ```js
 if (isFunc || !cloneableTags[tag]) {
     return object ? value : {}
 }
 ```
 
-如果不用lodash的话，最后一般都是根据业务来使用深拷贝
-
-说到最后，一种普适的深拷贝方案要满足：
+最后，一种普适的深拷贝方案要满足：
 1. 兼容环引用
 2. 兼容symbol作为key
 3. 保留继承关系
