@@ -14,3 +14,8 @@
   <a href="#clourse">浅谈js内存和闭包</a>&nbsp;&nbsp;
 </details>
 
+<details>
+  <summary>方法论专题</summary>
+  <a href="#notice">前端工程师如何持续保持热情和快速成长(万字长文)</a>&nbsp;&nbsp;
+</details>
+
