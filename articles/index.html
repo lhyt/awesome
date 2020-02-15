@@ -1,21 +1,47 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>articles</title>
-	<link rel="stylesheet" href="//unpkg.com/docsify/themes/vue.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-	<div data-app id="main"></div>
-</body>
-<script>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>lhyt-articles</title>
+    <link rel="stylesheet" href="//unpkg.com/docsify/themes/buble.css" />
+    <link rel="stylesheet" type="text/css" href="../live2d/assets/waifu.css" />
+    <style>
+      .waifu-tips {
+        background-color: #34495e;
+        box-shadow: 0 3px 15px 2px rgba(39, 41, 84, 0.5);
+        color: #fff;
+      }
+      .waifu {
+        left: 40px;
+      }
+      * {
+        cursor: url('cursor.png'), auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-app id="lhyt-acticle-main"></div>
+    <div class="waifu">
+      <div class="waifu-tips"></div>
+      <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+    </div>
+  </body>
+  <script>
     window.$docsify = {
-      el: '#main',
+      el: '#lhyt-acticle-main',
       homepage: 'README.md',
       basePath: './',
-    }
+      repo: 'https://www.github.com/lhyt',
+    };
   </script>
-<script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+  <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+  <script src="../live2d/assets/waifu-tips.js"></script>
+  <script src="../live2d/assets/live2d.js"></script>
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+    setTimeout(() => {
+      initModel('live2d/assets/', () => {}, Math.round(Math.random() * 6));
+    }, 2000);
+  </script>
 </html>

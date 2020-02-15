@@ -3,3 +3,10 @@ body {
   color: #fff;
   font-family: Poppins,sans-serif;
 }
+
+.doc-iframe {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 46px;
+}

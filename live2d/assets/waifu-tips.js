@@ -176,10 +176,10 @@ function firstMessage() {
   showMessage(text, 6000);
 }
 
-function initModel(waifuPath, cb = () => {}) {
+function initModel(waifuPath, cb = () => {}, mid) {
   if (waifuPath === undefined) waifuPath = '';
-  const modelId = 3 || 1;
-  const modelTexturesId = 0;
+  const modelId = mid || 3;
+  const modelTexturesId = mid === 3 ? 0 : Math.floor(Math.random() * 3);
   loadModel(modelId, modelTexturesId, () => {
     cb();
     firstMessage();

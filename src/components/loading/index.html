@@ -4,7 +4,6 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    text-align: center;
   }
 
   .lhyt-loading {
@@ -67,13 +66,15 @@
   }
   .lhyt-loading-button {
     z-index: 1;
-    position: relative;
+    position: absolute;
     font-size: inherit;
     font-family: inherit;
     color: white;
     padding: 0.5em 1em;
     outline: none;
-    top: 12em;
+    top: 16em;
+    left: 50%;
+    transform: translateX(-50%);
     border: none;
     background-color: hsl(236, 32%, 26%);
   }
@@ -108,7 +109,7 @@
     }
   }
 </style>
-<div class="lhyt-loading-container">
+<div style="display: none;" class="lhyt-loading-container">
   <div class="lhyt-loading">
     <div class="lhyt-loading-outer"></div>
     <div class="lhyt-loading-middle"></div>
@@ -123,8 +124,16 @@
 </div>
 <script>
   (window.onload = () => {
+    const container = document.querySelector('.lhyt-loading-container');
+    if (!container) {
+      return;
+    }
+    if (window.SECOND_FLAG) {
+      container.parentNode.removeChild(container);
+      return;
+    }
+    container.style.display = 'block';
     function animation(e) {
-      console.log(e);
       return new Promise(r => {
         e.classList.add('loading-active-txt');
         setTimeout(() => {
@@ -139,7 +148,7 @@
       });
       promise.finally(() => {
         const btn = document.querySelector('.lhyt-loading-button');
-        btn.style.display = 'block';
+        btn.style.display = 'inline-block';
         btn.onclick = window.handleClickGoInLoading;
       });
     }, 500);

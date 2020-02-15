@@ -19,7 +19,6 @@
       rel="import"
       href="/src/components/loading/index.html"
     />
-    <link data-import="asd" rel="import" href="/src/components/asd.html" />
     <link rel="stylesheet" type="text/css" href="live2d/assets/waifu.css" />
     <link rel="stylesheet" type="text/css" href="src/index.css" />
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
@@ -28,13 +27,15 @@
       body {
         margin: 0;
       }
+      * {
+        cursor: url('./cursor.png'), auto;
+      }
     </style>
   </head>
 
   <body>
-    <main style="display: none;" class="lhyt-main-container">
+    <main class="lhyt-main-container">
       $$header$$
-      <div></div>
       <div class="waifu">
         <div class="waifu-tips"></div>
         <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
@@ -53,11 +54,23 @@
       //       'block';
       //   }, 3000);
       // };
+      const secondLoaded = sessionStorage.getItem('SECOND_FLAG');
+      if (secondLoaded) {
+        document.querySelector('.lhyt-main-container').style.display = 'block';
+        window.SECOND_FLAG = true;
+      } else {
+        sessionStorage.setItem('SECOND_FLAG', '1');
+        document.querySelector('.lhyt-main-container').style.display = 'none';
+      }
       window.handleClickGoInLoading = () => {
         const loading = document.querySelector('.lhyt-loading-container');
         loading.parentNode.removeChild(loading);
         document.querySelector('.lhyt-main-container').style.display = 'block';
       };
+    </script>
+
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script>
       initModel('live2d/assets/');
     </script>
   </body>
