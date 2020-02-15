@@ -1,11 +1,8 @@
 const TEXT_NODE_TYPE = 3;
-const {
-  querySelector,
-  createTextNode,
-} = new Proxy(document, {
+const { querySelector, createTextNode } = new Proxy(document, {
   get(target, name) {
     return Reflect.get(target, name).bind(target);
-  }
+  },
 });
 
 function E() {
@@ -13,6 +10,9 @@ function E() {
 }
 
 function travelBody(body = document.body) {
+  if (!body) {
+    return;
+  }
   const { childNodes = [] } = body;
   childNodes.forEach(childNode => {
     if (childNode.nodeType === TEXT_NODE_TYPE) {
@@ -23,32 +23,57 @@ function travelBody(body = document.body) {
           // $$header$$ => header.html.body.childNodes
           temp.unshift(match);
         });
+        let promiseCount = 0;
         temp.forEach(m => {
-          const { document: doc, childNodes: children, pathname } = chooseElements(m)
-          const innerDocumentEles = children;
-          [...innerDocumentEles].reduceRight((_, ele) => {
-            insertEle(ele, childNode);
+          chooseElements(m).then(r => {
+            promiseCount++;
+            const { document: doc, childNodes: children, pathname } = r;
+            const innerDocumentEles = children;
+            [...innerDocumentEles].reduceRight((_, ele) => {
+              insertEle(ele, childNode);
+            });
+            if (promiseCount === temp.length) {
+              body.removeChild(childNode);
+            }
           });
         });
-        body.removeChild(childNode);
       }
       return;
     }
     if (childNode.childNodes) {
       travelBody(childNode);
     }
-  })
+  });
+}
+
+// no support link import
+function fallbackLinkImport(link = document.createElement('link')) {
+  const { href } = link;
+  return fetch(href).then(r => {
+    return r.text().then(html => {
+      const div = document.createElement('div');
+      div.innerHTML = html;
+      return {
+        childNodes: div.childNodes,
+      };
+    });
+  });
 }
 
 function chooseElements(name) {
   // document object in html import
   const link = querySelector(`link[data-import="${name}"]`);
   const $document = link.import;
-  return {
-    document: $document,
-    childNodes: $document.body.cloneNode(true).childNodes,
-    pathname: new URL(link.href).pathname,
-  };
+  if ($document) {
+    return Promise.resolve({
+      document: $document,
+      childNodes: $document.body.cloneNode(true).childNodes,
+      pathname: new URL(link.href).pathname,
+    });
+  }
+  const html = fallbackLinkImport(link);
+  console.log(html);
+  return html;
 }
 
 function replaceEle(ele, target) {
@@ -73,7 +98,7 @@ function insertEle(ele, target) {
 
 /**
  * index.html pathname => index.js pathname
- * @param {string} pathname 
+ * @param {string} pathname
  * @returns {string} requireJs pathname
  */
 function pathNameToRequire(pathname) {

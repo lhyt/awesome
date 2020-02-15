@@ -1,0 +1,147 @@
+<style>
+  .lhyt-loading-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  .lhyt-loading {
+    font-size: 100px;
+  }
+
+  .lhyt-loading-outer,
+  .lhyt-loading-middle,
+  .lhyt-loading-inner {
+    border: 3px solid transparent;
+    border-top-color: #3cefff;
+    border-right-color: #3cefff;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+
+  .lhyt-loading-outer {
+    width: 3.5em;
+    height: 3.5em;
+    margin-left: -1.75em;
+    margin-top: -1.75em;
+    animation: spin 2s linear infinite;
+  }
+
+  .lhyt-loading-middle {
+    width: 2.1em;
+    height: 2.1em;
+    margin-left: -1.05em;
+    margin-top: -1.05em;
+    animation: spin 1.75s linear reverse infinite;
+  }
+
+  .lhyt-loading-inner {
+    width: 0.8em;
+    height: 0.8em;
+    margin-left: -0.4em;
+    margin-top: -0.4em;
+    animation: spin 1.5s linear infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .lhyt-loading-txt-container > p {
+    position: relative;
+    top: -240px;
+    transition: all 1s;
+    width: 0;
+    height: 20px;
+    overflow: hidden;
+    text-align: left;
+  }
+  .loading-active-txt {
+    width: 100% !important;
+  }
+  .lhyt-loading-button {
+    z-index: 1;
+    position: relative;
+    font-size: inherit;
+    font-family: inherit;
+    color: white;
+    padding: 0.5em 1em;
+    outline: none;
+    top: 12em;
+    border: none;
+    background-color: hsl(236, 32%, 26%);
+  }
+
+  .lhyt-loading-button:hover {
+    cursor: pointer;
+  }
+
+  .lhyt-loading-button::before {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: 4px solid hsl(236, 32%, 26%);
+    transform-origin: center;
+    transform: scale(1);
+    animation: scale-btn 1s infinite;
+  }
+
+  @keyframes scale-btn {
+    from {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    to {
+      transform: scale(1.75);
+      opacity: 0;
+    }
+  }
+</style>
+<div class="lhyt-loading-container">
+  <div class="lhyt-loading">
+    <div class="lhyt-loading-outer"></div>
+    <div class="lhyt-loading-middle"></div>
+    <div class="lhyt-loading-inner"></div>
+  </div>
+  <div class="lhyt-loading-txt-container">
+    <p>十年，像是一场恶梦，我一直等待着醒来的那一天</p>
+    <p>我归来时，城若阻我，我便拆了那城</p>
+    <p>官若拦我，我便宰了那官</p>
+  </div>
+  <button style="display: none;" class="lhyt-loading-button">进入主页</button>
+</div>
+<script>
+  (window.onload = () => {
+    function animation(e) {
+      console.log(e);
+      return new Promise(r => {
+        e.classList.add('loading-active-txt');
+        setTimeout(() => {
+          r();
+        }, 1000);
+      });
+    }
+    setTimeout(() => {
+      let promise = Promise.resolve();
+      document.querySelectorAll('.lhyt-loading-txt-container p').forEach(e => {
+        promise = promise.then(() => animation(e));
+      });
+      promise.finally(() => {
+        const btn = document.querySelector('.lhyt-loading-button');
+        btn.style.display = 'block';
+        btn.onclick = window.handleClickGoInLoading;
+      });
+    }, 500);
+  })();
+</script>

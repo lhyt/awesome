@@ -1,25 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="keywords" content="前端|JavaScript|lhyt" />
+    <meta
+      name="description"
+      content="希望成为技术栈非常花哨且具有学习意义的项目"
+    />
+    <link
+      data-import="header"
+      rel="import"
+      href="/src/components/header/index.html"
+    />
+    <link
+      data-import="loading"
+      rel="import"
+      href="/src/components/loading/index.html"
+    />
+    <link data-import="asd" rel="import" href="/src/components/asd.html" />
+    <link rel="stylesheet" type="text/css" href="live2d/assets/waifu.css" />
+    <link rel="stylesheet" type="text/css" href="src/index.css" />
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <title>im lhyt</title>
+    <style>
+      body {
+        margin: 0;
+      }
+    </style>
+  </head>
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<meta name="keywords" content="前端|JavaScript|lhyt">
-	<meta name="description" content="希望成为技术栈非常花哨且具有学习意义的项目">
-	<link data-import="header" rel="import" href="/src/components/header/index.html">
-	<link data-import="asd" rel="import" href="/src/components/asd.html">
-	<title>im lhyt</title>
-	<style>
-		body {
-			margin: 0;
-		}
-	</style>
-</head>
+  <body>
+    <main style="display: none;" class="lhyt-main-container">
+      $$header$$
+      <div></div>
+      <div class="waifu">
+        <div class="waifu-tips"></div>
+        <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+      </div>
+    </main>
+    $$loading$$
 
-<body>
-	<main class="lhyt-main-container">
-		$$header$$
-	</main>
-<script type="text/javascript" src="/bundle.js?bbf6215a1d03c6b70b67"></script></body>
+    <script src="live2d/assets/waifu-tips.js"></script>
+    <script src="live2d/assets/live2d.js"></script>
+    <script>
+      // window.onload = () => {
+      //   setTimeout(() => {
+      //     const loading = document.querySelector('.lhyt-loading-container');
+      //     loading.parentNode.removeChild(loading);
+      //     document.querySelector('.lhyt-main-container').style.display =
+      //       'block';
+      //   }, 3000);
+      // };
+      window.handleClickGoInLoading = () => {
+        const loading = document.querySelector('.lhyt-loading-container');
+        loading.parentNode.removeChild(loading);
+        document.querySelector('.lhyt-main-container').style.display = 'block';
+      };
+      initModel('live2d/assets/');
+    </script>
+  <script type="text/javascript" src="/bundle.js?95c2a6f9a2510ea85e57"></script></body>
 </html>
