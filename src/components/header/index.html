@@ -18,7 +18,7 @@
       }
       .lhyt-main-container-header__nav {
         position: absolute;
-        top: 0;
+        top: 8px;
         display: flex;
       }
       .lhyt-main-container-header__nav div {
@@ -29,14 +29,20 @@
         cursor: pointer;
         user-select: none;
       }
+      .lhyt-main-container-header__color {
+        width: 100%;
+        height: 8px;
+        background: linear-gradient(90deg, #1aecff, #ff1a62);
+      }
     </style>
   </head>
   <body>
     <header class="lhyt-main-container-header">
+      <div class="lhyt-main-container-header__color"></div>
       <nav class="lhyt-main-container-header__nav">
-        <div>About Me</div>
-        <div>Houdini Demo</div>
-        <div>Article</div>
+        <div class="underline-blue">github</div>
+        <div class="underline-blue">Houdini Demo</div class="underline-blue">
+        <div class="underline-blue">文章|沉淀</div class="underline-blue">
       </nav>
       <figure>
         <figcaption></figcaption>

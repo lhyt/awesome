@@ -1,10 +1,10 @@
-module.exports = function(doc = document) {
+export default function(doc = document) {
   const handleClickNav = [
     () => {
-      window.location.href = 'https://www.github.com/lhyt';
+      window.open('https://www.github.com/lhyt', '_blank');
     },
     () => {
-      window.location.href = '/src/houdini/';
+      window.open('/src/houdini/', '_blank');
     },
     () => {
       window.open('/articles', '_blank');
@@ -20,4 +20,4 @@ module.exports = function(doc = document) {
       });
     });
   }, 300);
-};
+}

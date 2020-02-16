@@ -105,4 +105,4 @@ function pathNameToRequire(pathname) {
   return pathname.replace(/\.html$/, '.js');
 }
 
-module.exports = E;
+export default E;

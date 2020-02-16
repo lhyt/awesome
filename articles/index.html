@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>lhyt-articles</title>
-    <link rel="stylesheet" href="//unpkg.com/docsify/themes/buble.css" />
+    <link rel="stylesheet" href="//unpkg.com/docsify/themes/dark.css" />
     <link rel="stylesheet" type="text/css" href="../live2d/assets/waifu.css" />
     <style>
       .waifu-tips {
@@ -13,7 +13,8 @@
         color: #fff;
       }
       .waifu {
-        left: 40px;
+        left: unset;
+        right: 0;
       }
       * {
         cursor: url('cursor.png'), auto;
@@ -41,7 +42,7 @@
   <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
   <script>
     setTimeout(() => {
-      initModel('live2d/assets/', () => {}, Math.round(Math.random() * 6));
+      initModel('live2d/assets/', () => {}, Math.round(Math.random() * 5));
     }, 2000);
   </script>
 </html>

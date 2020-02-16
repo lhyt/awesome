@@ -31,6 +31,15 @@
         cursor: url('./cursor.png'), auto;
       }
     </style>
+    <script>
+      document.addEventListener('DOMContentLoaded', function(event) {
+        const arr = ['#3cefff', '#fc2f70'];
+        document.body.style.setProperty(
+          '--main-color',
+          arr[~~(Math.random() * 2)],
+        );
+      });
+    </script>
   </head>
 
   <body>
@@ -54,7 +63,8 @@
       //       'block';
       //   }, 3000);
       // };
-      const secondLoaded = sessionStorage.getItem('SECOND_FLAG');
+      const secondLoaded = 0;
+      // const secondLoaded = sessionStorage.getItem('SECOND_FLAG');
       if (secondLoaded) {
         document.querySelector('.lhyt-main-container').style.display = 'block';
         window.SECOND_FLAG = true;

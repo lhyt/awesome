@@ -7,15 +7,15 @@
   }
 
   .lhyt-loading {
-    font-size: 100px;
+    font-size: 4rem;
   }
 
   .lhyt-loading-outer,
   .lhyt-loading-middle,
   .lhyt-loading-inner {
     border: 3px solid transparent;
-    border-top-color: #3cefff;
-    border-right-color: #3cefff;
+    border-top-color: var(--main-color);
+    border-right-color: var(--main-color);
     border-radius: 50%;
     position: absolute;
     top: 50%;
@@ -54,15 +54,15 @@
 
   .lhyt-loading-txt-container > p {
     position: relative;
-    top: -240px;
-    transition: all 1s;
+    top: -220px;
+    transition: all 1.5s 0.5s;
     width: 0;
     height: 20px;
     overflow: hidden;
     text-align: left;
   }
   .loading-active-txt {
-    width: 100% !important;
+    width: 260px !important;
   }
   .lhyt-loading-button {
     z-index: 1;
@@ -72,11 +72,19 @@
     color: white;
     padding: 0.5em 1em;
     outline: none;
-    top: 16em;
     left: 50%;
     transform: translateX(-50%);
     border: none;
     background-color: hsl(236, 32%, 26%);
+    display: none;
+  }
+
+  .enter-home {
+    top: 16em;
+  }
+
+  .enter-blog {
+    top: 20em;
   }
 
   .lhyt-loading-button:hover {
@@ -116,41 +124,12 @@
     <div class="lhyt-loading-inner"></div>
   </div>
   <div class="lhyt-loading-txt-container">
-    <p>十年，像是一场恶梦，我一直等待着醒来的那一天</p>
-    <p>我归来时，城若阻我，我便拆了那城</p>
+    <p>十年，像是一场恶梦</p>
+    <p>我一直等待着醒来的那一天</p>
+    <p>我归来时</p>
+    <p>城若阻我，我便拆了那城</p>
     <p>官若拦我，我便宰了那官</p>
   </div>
-  <button style="display: none;" class="lhyt-loading-button">进入主页</button>
+  <button class="lhyt-loading-button enter-home">进入主页</button>
+  <button class="lhyt-loading-button enter-blog">进入博客</button>
 </div>
-<script>
-  (window.onload = () => {
-    const container = document.querySelector('.lhyt-loading-container');
-    if (!container) {
-      return;
-    }
-    if (window.SECOND_FLAG) {
-      container.parentNode.removeChild(container);
-      return;
-    }
-    container.style.display = 'block';
-    function animation(e) {
-      return new Promise(r => {
-        e.classList.add('loading-active-txt');
-        setTimeout(() => {
-          r();
-        }, 1000);
-      });
-    }
-    setTimeout(() => {
-      let promise = Promise.resolve();
-      document.querySelectorAll('.lhyt-loading-txt-container p').forEach(e => {
-        promise = promise.then(() => animation(e));
-      });
-      promise.finally(() => {
-        const btn = document.querySelector('.lhyt-loading-button');
-        btn.style.display = 'inline-block';
-        btn.onclick = window.handleClickGoInLoading;
-      });
-    }, 500);
-  })();
-</script>
