@@ -1,5 +1,12 @@
 # 关于我
-
+<style>
+  a {
+    text-decoration: unset !important;
+    cursor: pointer !important;
+    display: block;
+    margin: 0 8px;
+  }
+</style>
 # 目录
 ## js基础与深入
 这是js的基础上深究的模块，也是本人最喜欢研究的一个地方。早起入门的时候喜欢研究黑科技，但是那时候没有沉淀，就追不回来全部了。下面是早期的部分研究和后续的研究，包括js基础、黑科技、es6+高级语法、原生冷门知识
@@ -34,7 +41,6 @@
   <a href="#bfsdfs">js版本的（广、深）度优先搜索</a><br />
   <a href="#random-num">js随机数生成器的扩展</a><br />
   <a href="#diff">小白的diff算法试试水之旅</a><br />
-  <a href="#tree">前端工程师彻底征服树结构组件的秘籍</a><br />
   <a href="#two-sum">[js算法]手把手带你从leetcode原题——【两数相加】到大数相加</a><br />
   <a href="#reduce">面试官： 你为什么这么强，什么都敢盘（reduce）</a><br />
   <a href="#lds-bywith">内功修炼之lodash——By、With系列</a><br />
@@ -58,7 +64,7 @@
 </details>
 
 ## 解决方案专题
-一些解决方案，个人的经验记录。是脱离代码层面的，偏业务和业务逻辑，重在“实现了xxx功能”
+一些解决方案，个人的经验记录。是稍微有点脱离代码层面的，偏业务和业务逻辑，重在“实现了xxx功能”
 <details>
   <summary>解决方案专题</summary>
     <a href="#some-ask">（VUE!jQuery！插件！）盘点前端群的无脑回答</a><br />
@@ -66,6 +72,7 @@
   <a href="#pwa-webpack">pwa+webpack，初探与踩坑</a><br />
   <a href="#page-chat">不同页面通信与跨域</a><br />
   <a href="#fe-fe">前端和前端联调的各种姿势，了解一下</a><br />
+  <a href="#tree">前端工程师彻底征服树结构组件的秘籍</a><br />
   <a href="#drag">追求完美代码之——实现元素拖拽修改宽高和位移插件</a><br />
 </details>
 
