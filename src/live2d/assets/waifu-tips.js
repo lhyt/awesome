@@ -1,7 +1,7 @@
-String.prototype.render = function(context) {
+String.prototype.render = function (context) {
   const tokenReg = /(\\)?\{([^\{\}\\]+)(\\)?\}/g;
 
-  return this.replace(tokenReg, function(word, slash1, token, slash2) {
+  return this.replace(tokenReg, function (word, slash1, token, slash2) {
     if (slash1 || slash2) {
       return word.replace('\\', '');
     }
@@ -13,7 +13,9 @@ String.prototype.render = function(context) {
     for (i = 0, length = constiables.length; i < length; ++i) {
       constiable = constiables[i];
       currentObject = currentObject[constiable];
-      if (currentObject === undefined || currentObject === null) return '';
+      if (currentObject === undefined || currentObject === null) {
+        return '';
+      }
     }
     return currentObject;
   });
@@ -21,7 +23,7 @@ String.prototype.render = function(context) {
 
 const re = /x/;
 console.log(re);
-re.toString = function() {
+re.toString = function () {
   showMessage('发现你打开了控制台，你可能是前端工程师？', 5000, true);
   return '';
 };
@@ -30,7 +32,7 @@ document.addEventListener('copy', () => {
   showMessage('发现你复制了，好东西记得分享给小伙伴哦', 5000, true);
 });
 
-//window.hitokotoTimer = window.setInterval(showHitokoto,30000);
+// window.hitokotoTimer = window.setInterval(showHitokoto,30000);
 /* 检测用户活动状态，并在空闲时 定时显示一言 */
 let getActed = false;
 window.hitokotoTimer = 0;
@@ -43,9 +45,12 @@ document.addEventListener('mousemove', () => {
 document.addEventListener('keydown', () => {
   getActed = true;
 });
-setInterval(function() {
-  if (!getActed) ifActed();
-  else elseActed();
+setInterval(function () {
+  if (!getActed) {
+    ifActed();
+  } else {
+    elseActed();
+  }
 }, 1000);
 
 function ifActed() {
@@ -62,56 +67,52 @@ function elseActed() {
 
 function showHitokoto() {
   /* 增加 hitokoto.cn API */
-  $.getJSON('https://v1.hitokoto.cn', function(result) {
+  $.getJSON('https://v1.hitokoto.cn', function (result) {
     let text =
       '这句一言来自 <span style="color:#0099cc;">『{source}』</span>，是 <span style="color:#0099cc;">{creator}</span> 在 hitokoto.cn 投稿的。';
     text = text.render({ source: result.from, creator: result.creator });
     showMessage(result.hitokoto, 5000);
-    window.setTimeout(function() {
+    window.setTimeout(function () {
       showMessage(text, 3000);
     }, 5000);
   });
 }
 
 function showMessage(text, timeout, flag) {
-  if (
-    flag ||
-    sessionStorage.getItem('waifu-text') === '' ||
-    sessionStorage.getItem('waifu-text') === null
-  ) {
-    if (Array.isArray(text))
+  if (flag || sessionStorage.getItem('waifu-text') === '' || sessionStorage.getItem('waifu-text') === null) {
+    if (Array.isArray(text)) {
       text = text[Math.floor(Math.random() * text.length + 1) - 1];
-    //console.log(text);
+    }
+    // console.log(text);
 
-    if (flag) sessionStorage.setItem('waifu-text', text);
+    if (flag) {
+      sessionStorage.setItem('waifu-text', text);
+    }
 
     $('.waifu-tips').stop();
-    $('.waifu-tips')
-      .html(text)
-      .fadeTo(200, 1);
-    if (timeout === undefined) timeout = 5000;
+    $('.waifu-tips').html(text).fadeTo(200, 1);
+    if (timeout === undefined) {
+      timeout = 5000;
+    }
     hideMessage(timeout);
   }
 }
 
 function hideMessage(timeout) {
-  $('.waifu-tips')
-    .stop()
-    .css('opacity', 1);
-  if (timeout === undefined) timeout = 5000;
-  window.setTimeout(function() {
+  $('.waifu-tips').stop().css('opacity', 1);
+  if (timeout === undefined) {
+    timeout = 5000;
+  }
+  window.setTimeout(function () {
     sessionStorage.removeItem('waifu-text');
   }, timeout);
-  $('.waifu-tips')
-    .delay(timeout)
-    .fadeTo(200, 0);
+  $('.waifu-tips').delay(timeout).fadeTo(200, 0);
 }
 
 function firstMessage() {
   let text;
-  //const SiteIndexUrl = 'https://www.fghrsh.net/';  // 手动指定主页
-  const SiteIndexUrl =
-    window.location.protocol + '//' + window.location.hostname + '/'; // 自动获取主页
+  // const SiteIndexUrl = 'https://www.fghrsh.net/';  // 手动指定主页
+  const SiteIndexUrl = `${window.location.protocol}//${window.location.hostname}/`; // 自动获取主页
 
   if (window.location.href == SiteIndexUrl) {
     // 如果是主页
@@ -141,43 +142,33 @@ function firstMessage() {
       referrer.href = document.referrer;
       const domain = referrer.hostname.split('.')[1];
       if (window.location.hostname == referrer.hostname) {
-        text =
-          '欢迎阅读<span style="color:#0099cc;">『' +
-          document.title.split(' - ')[0] +
-          '』</span>';
+        text = `欢迎阅读<span style="color:#0099cc;">『${document.title.split(' - ')[0]}』</span>`;
       } else if (domain == 'baidu') {
-        text =
-          'Hello! 来自 百度搜索 的朋友<br>你是搜索 <span style="color:#0099cc;">' +
-          referrer.search.split('&wd=')[1].split('&')[0] +
-          '</span> 找到的我吗？';
+        text = `Hello! 来自 百度搜索 的朋友<br>你是搜索 <span style="color:#0099cc;">${
+          referrer.search.split('&wd=')[1].split('&')[0]
+        }</span> 找到的我吗？`;
       } else if (domain == 'so') {
-        text =
-          'Hello! 来自 360搜索 的朋友<br>你是搜索 <span style="color:#0099cc;">' +
-          referrer.search.split('&q=')[1].split('&')[0] +
-          '</span> 找到的我吗？';
+        text = `Hello! 来自 360搜索 的朋友<br>你是搜索 <span style="color:#0099cc;">${
+          referrer.search.split('&q=')[1].split('&')[0]
+        }</span> 找到的我吗？`;
       } else if (domain == 'google') {
-        text =
-          'Hello! 来自 谷歌搜索 的朋友<br>欢迎阅读<span style="color:#0099cc;">『' +
-          document.title.split(' - ')[0] +
-          '』</span>';
+        text = `Hello! 来自 谷歌搜索 的朋友<br>欢迎阅读<span style="color:#0099cc;">『${
+          document.title.split(' - ')[0]
+        }』</span>`;
       } else {
-        text =
-          'Hello! 来自 <span style="color:#0099cc;">' +
-          referrer.hostname +
-          '</span> 的朋友';
+        text = `Hello! 来自 <span style="color:#0099cc;">${referrer.hostname}</span> 的朋友`;
       }
     } else {
-      text =
-        '欢迎阅读<span style="color:#0099cc;">『' +
-        document.title.split(' - ')[0] +
-        '』</span>';
+      text = `欢迎阅读<span style="color:#0099cc;">『${document.title.split(' - ')[0]}』</span>`;
     }
   }
   showMessage(text, 6000);
 }
 
 function initModel(waifuPath, cb = () => {}, mid) {
-  if (waifuPath === undefined) waifuPath = '';
+  if (waifuPath === undefined) {
+    waifuPath = '';
+  }
   const modelId = mid || 3;
   const modelTexturesId = mid === 3 ? 0 : Math.floor(Math.random() * 3);
   loadModel(modelId, modelTexturesId, () => {
@@ -191,10 +182,10 @@ function initModel(waifuPath, cb = () => {}, mid) {
         const filters = document.querySelector(tips.selector);
         document.addEventListener('click', e => {
           if (filters === e.target) {
-            let text = tips.text;
-            if (Array.isArray(tips.text))
-              text =
-                tips.text[Math.floor(Math.random() * tips.text.length + 1) - 1];
+            let { text } = tips;
+            if (Array.isArray(tips.text)) {
+              text = tips.text[Math.floor(Math.random() * tips.text.length + 1) - 1];
+            }
             text = text.render({ text });
             showMessage(text, 3000);
           }
@@ -211,10 +202,10 @@ function initModel(waifuPath, cb = () => {}, mid) {
           after.split('/')[1] <= now.getDate() &&
           now.getDate() <= before.split('/')[1]
         ) {
-          let text = tips.text;
-          if (Array.isArray(tips.text))
-            text =
-              tips.text[Math.floor(Math.random() * tips.text.length + 1) - 1];
+          let { text } = tips;
+          if (Array.isArray(tips.text)) {
+            text = tips.text[Math.floor(Math.random() * tips.text.length + 1) - 1];
+          }
           text = text.render({ year: now.getFullYear() });
           showMessage(text, 6000, true);
         }
@@ -225,15 +216,16 @@ function initModel(waifuPath, cb = () => {}, mid) {
 
 function loadModel(modelId, modelTexturesId, cb = () => {}) {
   localStorage.setItem('modelId', modelId);
-  if (modelTexturesId === undefined) modelTexturesId = 0;
+  if (modelTexturesId === undefined) {
+    modelTexturesId = 0;
+  }
   localStorage.setItem('modelTexturesId', modelTexturesId);
   loadlive2d(
     'live2d',
-    'https://api.fghrsh.net/live2d/get/?id=' + modelId + '-' + modelTexturesId,
-    console.log(
-      'live2d',
-      '模型 ' + modelId + '-' + modelTexturesId + ' 加载完成',
-    ),
-    cb(),
+    `https://api.fghrsh.net/live2d/get/?id=${modelId}-${modelTexturesId}`,
+    console.log('live2d', `模型 ${modelId}-${modelTexturesId} 加载完成`),
+    cb()
   );
 }
+
+export { initModel, loadModel };
